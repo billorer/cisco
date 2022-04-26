@@ -6,12 +6,18 @@ import axios from "axios";
 const ErrorAxios = ({ children }) => {
   const { setError } = useContext(githubContext);
   useMemo(() => {
-    axios.interceptors.response.use(function (response) {
-      if (response.data.errors && response.data.errors[0]) {
-        setError(response.data.errors[0].message);
+    axios.interceptors.response.use(
+      function (response) {
+        if (response.data.errors && response.data.errors[0]) {
+          setError(response.data.errors[0].message);
+        }
+        return response;
+      },
+      function (error) {
+        setError("Something went wrong!");
+        return Promise.reject(error);
       }
-      return response;
-    });
+    );
   }, [setError]);
 
   return children;
