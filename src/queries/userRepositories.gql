@@ -1,0 +1,28 @@
+query UserRepositoriesQuery($login: String!) {
+  user(login: $login) {
+    repositories(first: 50) {
+      nodes {
+        id
+        name
+        isFork
+        url
+        shortDescriptionHTML
+        object(expression: "master") {
+          ... on Commit {
+            history(first: 1) {
+              nodes {
+                committedDate
+              }
+            }
+          }
+        }
+        issues {
+          totalCount
+        }
+        pullRequests {
+          totalCount
+        }
+      }
+    }
+  }
+}

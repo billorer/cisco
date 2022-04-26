@@ -4,18 +4,19 @@ import Home from "./components/Home";
 
 import GithubState from "./context/GithubState";
 
+import "./interceptors/auth.interceptor";
+import ErrorAxios from "./interceptors/error.interceptor";
+
 function App() {
   return (
     <GithubState>
-      <Router>
-        <div className="App">
-          <div className="container">
-            <Routes>
-              <Route exact path="/" element={<Home />} />
-            </Routes>
-          </div>
-        </div>
-      </Router>
+      <ErrorAxios>
+        <Router>
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+          </Routes>
+        </Router>
+      </ErrorAxios>
     </GithubState>
   );
 }

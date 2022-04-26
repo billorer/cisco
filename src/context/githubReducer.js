@@ -1,7 +1,6 @@
-import { SET_REPOS, SET_USER_REPO } from "./types";
+import { SET_REPOS, SET_USER_REPO, SET_GITHUB_ERROR } from "./actions";
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default (state, action) => {
+const githubReducer = (state, action) => {
   switch (action.type) {
     case SET_REPOS:
       return {
@@ -13,8 +12,14 @@ export default (state, action) => {
         ...state,
         user: action.payload,
       };
-
+    case SET_GITHUB_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
     default:
       return state;
   }
 };
+
+export default githubReducer;
