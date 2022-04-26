@@ -1,4 +1,5 @@
 import React, { Fragment, useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   Input,
@@ -15,6 +16,7 @@ import {
 import GithubContext from "../context/githubContext";
 
 const NewRepo = () => {
+  const { t } = useTranslation("common");
   const githubContext = useContext(GithubContext);
   const { user, createUserRepo } = githubContext;
 
@@ -60,14 +62,19 @@ const NewRepo = () => {
 
   return (
     <Fragment>
+      <h4 style={{ marginBottom: "0", textAlign: "center" }}>
+        {t("newRepo.createRepo")}
+      </h4>
       <form onSubmit={onSubmit} className="form">
         <FormGroup
           sx={{
             flexDirection: "column",
             alignItems: "center",
+            margin: "0 0 25px 0",
           }}
         >
           <Input
+            style={{ width: "400px" }}
             type="text"
             name="name"
             placeholder="Name"
@@ -75,6 +82,7 @@ const NewRepo = () => {
             onChange={onChange}
           />
           <Input
+            style={{ width: "400px" }}
             type="text"
             name="description"
             placeholder="Description"
@@ -82,6 +90,7 @@ const NewRepo = () => {
             onChange={onChange}
           />
           <Input
+            style={{ width: "400px" }}
             type="text"
             name="homepageUrl"
             placeholder="HomepageUrl"
@@ -96,8 +105,15 @@ const NewRepo = () => {
             alignItems: "center",
           }}
         >
-          <FormControl>
-            <FormLabel sx={{ alignSelf: "center" }}>Visibility</FormLabel>
+          <FormControl
+            sx={{
+              margin: "0 25px ",
+            }}
+          >
+            <FormLabel sx={{ alignSelf: "center" }}>
+              {" "}
+              {t("newRepo.visibility")}
+            </FormLabel>
             <RadioGroup
               defaultValue="PUBLIC"
               name="visibility"
@@ -117,7 +133,11 @@ const NewRepo = () => {
               />
             </RadioGroup>
           </FormControl>
-          <FormGroup>
+          <FormGroup
+            sx={{
+              margin: "0 25px ",
+            }}
+          >
             <FormControlLabel
               control={
                 <Checkbox
@@ -141,7 +161,7 @@ const NewRepo = () => {
           </FormGroup>
         </FormGroup>
         <Button sx={{ alignSelf: "center" }} type="submit">
-          Create Repo
+          {t("newRepo.save")}
         </Button>
       </form>
     </Fragment>

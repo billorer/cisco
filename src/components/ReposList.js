@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useTranslation } from "react-i18next";
 
 import { DataGrid } from "@mui/x-data-grid";
 import DoneIcon from "@mui/icons-material/Done";
@@ -7,6 +8,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import GithubContext from "../context/githubContext";
 
 const ReposList = () => {
+  const { t } = useTranslation("common");
   const githubContext = useContext(GithubContext);
   const { repos } = githubContext;
 
@@ -36,34 +38,34 @@ const ReposList = () => {
   const columns = [
     {
       field: "name",
-      headerName: "Name",
+      headerName: t("reposList.name"),
       width: 150,
     },
     {
       field: "shortDescriptionHTML",
-      headerName: "Short Description",
+      headerName: t("reposList.shortdescription"),
       width: 150,
     },
     {
       field: "isFork",
-      headerName: "Is Fork?",
+      headerName: t("reposList.isfork"),
       width: 90,
       renderCell: (params) =>
         params ? <DoneIcon></DoneIcon> : <CloseIcon></CloseIcon>,
     },
     {
       field: "issueCount",
-      headerName: "Issues Count",
+      headerName: t("reposList.issuescount"),
       width: 150,
     },
     {
       field: "pullRequestsCount",
-      headerName: "Pull request Count",
+      headerName: t("reposList.pullrequestcount"),
       width: 150,
     },
     {
       field: "lastCommitDate",
-      headerName: "Last commit date",
+      headerName: t("reposList.lastcommitdate"),
       width: 150,
     },
   ];
@@ -73,7 +75,7 @@ const ReposList = () => {
   };
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <div style={{ height: 400, width: "100%", marginTop: 25 }}>
       <DataGrid
         rows={rows}
         columns={columns}

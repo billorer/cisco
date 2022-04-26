@@ -1,0 +1,19 @@
+{
+  "home": {
+    "getCurUserRepos": "Get Current User Repos"
+  },
+  "newRepo": {
+    "createRepo": "Create Repo",
+    "save": "Save",
+    "visibility": "Visibility"
+  },
+  "search": { "search": "Search" },
+  "reposList": {
+    "name": "Name",
+    "shortdescription": "Short Description",
+    "isfork": "Is Fork?",
+    "issuescount": "Issues Count",
+    "pullrequestcount": "Pull request Count",
+    "lastcommitdate": "Last commit date"
+  }
+}

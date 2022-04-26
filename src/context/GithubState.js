@@ -4,7 +4,12 @@ import { loader } from "graphql.macro";
 
 import GithubContext from "./githubContext";
 import GithubReducer from "./githubReducer";
-import { SET_REPOS, SET_USER_REPO, SET_GITHUB_ERROR } from "./actions";
+import {
+  SET_REPOS,
+  SET_USER_REPO,
+  SET_GITHUB_ERROR,
+  SET_LOADING,
+} from "./actions";
 import { GITHUB_URL } from "../config/config";
 
 const GithubState = (props) => {
@@ -24,6 +29,8 @@ const GithubState = (props) => {
     });
   };
 
+  const setLoading = () => dispatch({ type: SET_LOADING });
+
   const createUserRepo = async (
     name,
     description,
@@ -33,6 +40,7 @@ const GithubState = (props) => {
     hasWikiEnabled,
     ownerId
   ) => {
+    setLoading();
     const createRepositoryQuery = loader("../queries/createRepo.gql").loc.source
       .body;
     await axios.post(GITHUB_URL, {
@@ -47,9 +55,11 @@ const GithubState = (props) => {
         ownerId,
       },
     });
+    getCurUserRepoUrl();
   };
 
   const getCurUserRepoUrl = async () => {
+    setLoading();
     const userQuery = loader("../queries/user.gql").loc.source.body;
     const res = await axios.post(GITHUB_URL, {
       query: userQuery,
@@ -61,6 +71,7 @@ const GithubState = (props) => {
   };
 
   const getRepos = async (username) => {
+    setLoading();
     const userRepositoriesQuery = loader("../queries/userRepositories.gql").loc
       .source.body;
     const res = await axios.post(GITHUB_URL, {
