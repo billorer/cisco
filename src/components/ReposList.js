@@ -76,13 +76,19 @@ const ReposList = () => {
 
   return (
     <div style={{ height: 400, width: "100%", marginTop: 25 }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        onRowClick={openRepoUrl}
-      />
+      {rows.length > 0 ? (
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+          onRowClick={openRepoUrl}
+        />
+      ) : (
+        <h3 style={{ textAlign: "center", textTransform: "uppercase" }}>
+          {t("reposList.emptyList")}
+        </h3>
+      )}
     </div>
   );
 };

@@ -14,6 +14,10 @@
     "isfork": "Is Fork?",
     "issuescount": "Issues Count",
     "pullrequestcount": "Pull request Count",
-    "lastcommitdate": "Last commit date"
+    "lastcommitdate": "Last commit date",
+    "emptyList": "No repositories!"
+  },
+  "error": {
+    "generalerror": "Something went wrong!"
   }
 }

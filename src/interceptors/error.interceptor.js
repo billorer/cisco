@@ -1,24 +1,26 @@
 import { useContext, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 import githubContext from "../context/githubContext";
 import axios from "axios";
 
 const ErrorAxios = ({ children }) => {
+  const { t } = useTranslation("common");
   const { setError } = useContext(githubContext);
   useMemo(() => {
     axios.interceptors.response.use(
-      function (response) {
+      (response) => {
         if (response.data.errors && response.data.errors[0]) {
           setError(response.data.errors[0].message);
         }
         return response;
       },
-      function (error) {
-        setError("Something went wrong!");
+      (error) => {
+        setError(t("error.generalerror"));
         return Promise.reject(error);
       }
     );
-  }, [setError]);
+  }, [setError, t]);
 
   return children;
 };

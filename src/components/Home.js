@@ -9,6 +9,7 @@ import Search from "./Search";
 import ReposList from "./ReposList";
 import Spinner from "./Spinner/Spinner";
 import { updateParamInURL } from "../utils/utils";
+import { SNACKBAR_AUTOHIDE } from "../config/config";
 
 const Home = () => {
   const { t } = useTranslation("common");
@@ -64,7 +65,11 @@ const Home = () => {
         </Fragment>
       )}
       {loading ? <Spinner /> : <ReposList />}
-      <Snackbar autoHideDuration={5000} open={!!error} onClose={closeSnackBar}>
+      <Snackbar
+        autoHideDuration={SNACKBAR_AUTOHIDE}
+        open={!!error}
+        onClose={closeSnackBar}
+      >
         <Alert severity="error">{error}</Alert>
       </Snackbar>
     </Fragment>
