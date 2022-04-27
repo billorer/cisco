@@ -1,0 +1,25 @@
+mutation CreateRepositoryQuery(
+  $name: String!
+  $description: String!
+  $homepageUrl: URI!
+  $visibility: RepositoryVisibility!
+  $ownerId: ID!
+  $hasIssuesEnabled: Boolean!
+  $hasWikiEnabled: Boolean!
+) {
+  createRepository(
+    input: {
+      name: $name
+      description: $description
+      homepageUrl: $homepageUrl
+      visibility: $visibility
+      ownerId: $ownerId
+      hasIssuesEnabled: $hasIssuesEnabled
+      hasWikiEnabled: $hasWikiEnabled
+    }
+  ) {
+    repository {
+      url
+    }
+  }
+}
