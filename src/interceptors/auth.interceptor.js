@@ -1,14 +1,18 @@
 import axios from "axios";
+import { noAccessToken } from "../config/config";
 
 const ACCESS_TOKEN = process.env.REACT_APP_ACCESS_TOKEN;
 
 axios.interceptors.request.use(
-  function (request) {
+  (request) => {
     request.headers["Content-Type"] = "application/json";
-    request.headers["Authorization"] = `bearer ${ACCESS_TOKEN}`;
-    return request;
+
+    if (ACCESS_TOKEN) {
+      request.headers["Authorization"] = `bearer ${ACCESS_TOKEN}`;
+      return request;
+    } else {
+      throw new axios.Cancel(noAccessToken);
+    }
   },
-  function (error) {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );

@@ -20,12 +20,14 @@ const Home = () => {
 
   useEffect(() => {
     !user && getCurUserRepoUrl();
-  }, [user, getCurUserRepoUrl]);
+  }, []);
 
   const curUserRepo = () => {
-    getRepos(user.login);
-    updateParamInURL(user.login);
-    setUserName(user.login);
+    if (user?.login) {
+      getRepos(user.login);
+      updateParamInURL(user.login);
+      setUserName(user.login);
+    }
   };
 
   const closeSnackBar = () => {

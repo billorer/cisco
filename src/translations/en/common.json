@@ -18,6 +18,7 @@
     "emptyList": "No repositories!"
   },
   "error": {
-    "generalerror": "Something went wrong!"
+    "generalerror": "Something went wrong!",
+    "notfound": "The page you are trying to access is not available or the github access token is not provided!"
   }
 }

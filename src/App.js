@@ -1,6 +1,12 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home";
+import Notfound from "./components/Notfound";
 
 import GithubState from "./context/GithubState";
 
@@ -10,13 +16,15 @@ import ErrorAxios from "./interceptors/error.interceptor";
 function App() {
   return (
     <GithubState>
-      <ErrorAxios>
-        <Router>
+      <Router>
+        <ErrorAxios>
           <Routes>
             <Route exact path="/" element={<Home />} />
+            <Route exact path="/notfound" element={<Notfound />} />
+            <Route path="*" element={<Navigate to="/notfound" />} />
           </Routes>
-        </Router>
-      </ErrorAxios>
+        </ErrorAxios>
+      </Router>
     </GithubState>
   );
 }
